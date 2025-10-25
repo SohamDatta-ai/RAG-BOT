@@ -15,7 +15,7 @@ ENV NEXT_PUBLIC_API_PREFIX=$NEXT_PUBLIC_API_PREFIX
 ENV NEXT_PUBLIC_DOMAIN_URL=$NEXT_PUBLIC_DOMAIN_URL
 
 # Install pnpm
-RUN npm install -g pnpm
+RUN npm install -g pnpm && apk add --no-cache dos2unix
 
 # Copy package files
 COPY package*.json ./
@@ -30,9 +30,5 @@ COPY . .
 # Expose port
 EXPOSE 3001
 
-# Copy and make startup script executable
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
-
-# Use the startup script
-CMD ["/bin/sh", "/app/start.sh"]
+# Start inline to avoid Windows line-ending issues with scripts
+CMD ["/bin/sh", "-lc", "if [ \"$NODE_ENV\" = \"development\" ]; then pnpm run dev -- -p 3001 -H 0.0.0.0; else pnpm run build && pnpm run start -- -p 3001 -H 0.0.0.0; fi"]

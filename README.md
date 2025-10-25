@@ -1,4 +1,4 @@
-# Smart Bots
+# RAG BOTS
 
 Create and deploy intelligent AI chatbots from your documents using RAG (Retrieval Augmented Generation) technology.
 
@@ -136,79 +136,10 @@ npm run dev
 - `PUT /api/agents/:id` - Update agent
 - `DELETE /api/agents/:id` - Delete agent
 
-### Files
-- `POST /api/agents/:id/files` - Upload files
-- `GET /api/agents/:id/files` - List files
-- `DELETE /api/agents/:id/files/:fileId` - Delete file
-
-### Training
-- `POST /api/agents/:id/train` - Start training
-- `GET /api/agents/:id/training-status` - Get training status
-
-### Chat
-- `POST /api/chat/:agentId` - Send message
-- `GET /api/chat/:agentId/history` - Get chat history
-
-### Embed
-- `GET /api/embed/:agentId.js` - Get embed script
-- `POST /api/embed/session` - Create embed session
-
-## Architecture
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │    Backend      │    │   Databases     │
-│   (Next.js)     │◄──►│   (Node.js)     │◄──►│                 │
-│                 │    │                 │    │ ┌─────────────┐ │
-│ - Agent Mgmt    │    │ - API Routes    │    │ │  MongoDB    │ │
-│ - File Upload   │    │ - File Process  │    │ │  (Users,    │ │
-│ - Chat UI       │    │ - AI Training   │    │ │  Agents,    │ │
-│ - Embed Widget  │    │ - RAG Pipeline  │    │ │  Sessions)  │ │
-└─────────────────┘    └─────────────────┘    │ └─────────────┘ │
-                                              │ ┌─────────────┐ │
-                                              │ │  Pinecone   │ │
-                                              │ │ (Vectors)   │ │
-                                              │ └─────────────┘ │
-                                              │ ┌─────────────┐ │
-                                              │ │    Redis    │ │
-                                              │ │ (Job Queue) │ │
-                                              │ └─────────────┘ │
-                                              └─────────────────┘
-```
-
-## Data Flow
-
-1. **Document Upload**: Files → Backend → MongoDB (metadata) + Disk (content)
-2. **Training**: Parse → Chunk → Embed → Pinecone (vectors)
-3. **Chat**: Query → PineCone Search → Context → LLM → Response
-4. **Embed**: Script → iframe → Backend API → Chat Interface
-
-## Security Features
-
-- JWT authentication for API access
-- User data isolation
-- File type and size validation
-- Rate limiting on API endpoints
-- CORS configuration for embed widgets
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT
 
-## Support
-
-For issues and questions:
-- Create an issue on GitHub
-- Check the documentation
-- Review the API reference
-
-Built with ❤️ using WEAM
-
+---
+Built with ❤️ by Soham.
