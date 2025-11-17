@@ -1,6 +1,7 @@
 # RAG BOTS
 
 Create and deploy intelligent AI chatbots from your documents using RAG (Retrieval Augmented Generation) technology.
+ soham's Version of the NotebookLM
 
 ## Features
 
